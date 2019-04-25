@@ -786,17 +786,6 @@ typedef enum {
                  127 (31.75 dB below full-scale). This parameter is used only
                  with ::AAC_DRC_PARAMETER_HANDLING_ENABLED and ignored
                  otherwise.\n Default: 127 (worst-case assumption).\n */
-  AAC_UNIDRC_SET_EFFECT = 0x0206, /*!< MPEG-D DRC: Request a DRC effect type for
-                                     selection of a DRC set.\n Supported indices
-                                     are:\n -1: DRC off. Completely disables
-                                     MPEG-D DRC.\n 0: None (default). Disables
-                                     MPEG-D DRC, but automatically enables DRC
-                                     if necessary to prevent clipping.\n 1: Late
-                                     night\n 2: Noisy environment\n 3: Limited
-                                     playback range\n 4: Low playback level\n 5:
-                                     Dialog enhancement\n 6: General
-                                     compression. Used for generally enabling
-                                     MPEG-D DRC without particular request.\n */
   AAC_UNIDRC_ALBUM_MODE =
       0x0207, /*!<  MPEG-D DRC: Enable album mode. 0: Disabled (default), 1:
                  Enabled.\n Disabled album mode leads to application of gain
