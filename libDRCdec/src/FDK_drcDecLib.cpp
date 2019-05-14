@@ -406,69 +406,71 @@ FDK_drcDec_SetParam(HANDLE_DRC_DECODER hDrcDec,
     }
   }
 
-  switch (requestType) {
-    case DRC_DEC_BOOST:
-      sErr = drcDec_SelectionProcess_SetParam(hDrcDec->hSelectionProc,
-                                              SEL_PROC_BOOST, requestValue,
-                                              &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_COMPRESS:
-      sErr = drcDec_SelectionProcess_SetParam(hDrcDec->hSelectionProc,
-                                              SEL_PROC_COMPRESS, requestValue,
-                                              &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_LOUDNESS_NORMALIZATION_ON:
-      sErr = drcDec_SelectionProcess_SetParam(
-          hDrcDec->hSelectionProc, SEL_PROC_LOUDNESS_NORMALIZATION_ON,
-          requestValue, &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_TARGET_LOUDNESS:
-      sErr = drcDec_SelectionProcess_SetParam(
-          hDrcDec->hSelectionProc, SEL_PROC_TARGET_LOUDNESS, requestValue,
-          &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_EFFECT_TYPE:
-      sErr = drcDec_SelectionProcess_SetParam(
-          hDrcDec->hSelectionProc, SEL_PROC_EFFECT_TYPE, requestValue,
-          &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_DOWNMIX_ID:
-      sErr = drcDec_SelectionProcess_SetParam(hDrcDec->hSelectionProc,
-                                              SEL_PROC_DOWNMIX_ID, requestValue,
-                                              &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_TARGET_CHANNEL_COUNT_REQUESTED:
-      sErr = drcDec_SelectionProcess_SetParam(
-          hDrcDec->hSelectionProc, SEL_PROC_TARGET_CHANNEL_COUNT, requestValue,
-          &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_BASE_CHANNEL_COUNT:
-      sErr = drcDec_SelectionProcess_SetParam(
-          hDrcDec->hSelectionProc, SEL_PROC_BASE_CHANNEL_COUNT, requestValue,
-          &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_NOT_OK;
-      break;
-    case DRC_DEC_LOUDNESS_MEASUREMENT_METHOD:
-      sErr = drcDec_SelectionProcess_SetParam(
-          hDrcDec->hSelectionProc, SEL_PROC_LOUDNESS_MEASUREMENT_METHOD,
-          requestValue, &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    case DRC_DEC_ALBUM_MODE:
-      sErr = drcDec_SelectionProcess_SetParam(hDrcDec->hSelectionProc,
-                                              SEL_PROC_ALBUM_MODE, requestValue,
-                                              &(hDrcDec->selProcInputDiff));
-      if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
-      break;
-    default:
-      return DRC_DEC_INVALID_PARAM;
+  if (hDrcDec->functionalRange & DRC_DEC_SELECTION) {
+    switch (requestType) {
+      case DRC_DEC_BOOST:
+        sErr = drcDec_SelectionProcess_SetParam(hDrcDec->hSelectionProc,
+                                                SEL_PROC_BOOST, requestValue,
+                                                &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_COMPRESS:
+        sErr = drcDec_SelectionProcess_SetParam(hDrcDec->hSelectionProc,
+                                                SEL_PROC_COMPRESS, requestValue,
+                                                &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_LOUDNESS_NORMALIZATION_ON:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_LOUDNESS_NORMALIZATION_ON,
+            requestValue, &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_TARGET_LOUDNESS:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_TARGET_LOUDNESS, requestValue,
+            &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_EFFECT_TYPE:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_EFFECT_TYPE, requestValue,
+            &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_DOWNMIX_ID:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_DOWNMIX_ID, requestValue,
+            &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_TARGET_CHANNEL_COUNT_REQUESTED:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_TARGET_CHANNEL_COUNT,
+            requestValue, &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_BASE_CHANNEL_COUNT:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_BASE_CHANNEL_COUNT, requestValue,
+            &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_NOT_OK;
+        break;
+      case DRC_DEC_LOUDNESS_MEASUREMENT_METHOD:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_LOUDNESS_MEASUREMENT_METHOD,
+            requestValue, &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      case DRC_DEC_ALBUM_MODE:
+        sErr = drcDec_SelectionProcess_SetParam(
+            hDrcDec->hSelectionProc, SEL_PROC_ALBUM_MODE, requestValue,
+            &(hDrcDec->selProcInputDiff));
+        if (sErr) return DRC_DEC_PARAM_OUT_OF_RANGE;
+        break;
+      default:
+        invalidParameter |= DRC_DEC_SELECTION;
+    }
   }
 
   if (invalidParameter == hDrcDec->functionalRange)
